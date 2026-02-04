@@ -22,12 +22,24 @@ pipeline {
         }
     }
 
-    post {
-        success {
-            echo 'Pipeline executed successfully from Git'
-        }
-        failure {
-            echo 'Pipeline failed'
+   pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Build in progress...'
+            }
         }
     }
+
+    post {
+        success {
+            echo 'BUILD SUCCESSFUL: Pipeline completed without errors'
+        }
+        failure {
+            echo 'BUILD FAILED: Please check the logs'
+        }
+    }
+}
 }
